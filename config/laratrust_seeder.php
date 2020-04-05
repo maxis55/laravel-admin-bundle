@@ -9,8 +9,6 @@ return [
         ],
         'user' => [
         ],
-        'store'=>[
-        ]
     ],
     'permission_structure' => [
     ],

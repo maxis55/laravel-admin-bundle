@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
 Route::group(
     [
         'prefix'    => 'admin',
@@ -52,10 +51,18 @@ Route::group(
 );
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::namespace('Front')->group(
+    function () {
 
-Auth::routes();
+        Route::get('/', function () {
+            return view('front.welcome');
+        });
 
-Route::get('/home', 'HomeController@index')->name('home');
+        Auth::routes();
+
+        Route::get('/home', 'HomeController@index')->name('home');
+
+    }
+);
+
+
