@@ -13,6 +13,45 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+Route::group(
+    [
+        'prefix'    => 'admin',
+        'as'        => 'admin.',
+        'namespace' => 'Admin',
+    ],
+    function () {
+        Auth::routes([
+            'register' => false,
+            'reset'    => false,
+            'verify'   => false,
+            'confirm'  => false
+        ]);
+    }
+);
+
+
+Route::group(
+    [
+        'prefix'     => 'admin/',
+        'as'         => 'admin.',
+        'namespace'  => 'Admin',
+        'middleware' => [
+            'auth:admin',
+            'admin',
+            'role:admin|superadmin',
+        ]
+    ],
+    function () {
+        Route::get('/', 'HomeController@index')
+            ->name('home');
+
+
+    }
+);
+
+
 Route::get('/', function () {
     return view('welcome');
 });
